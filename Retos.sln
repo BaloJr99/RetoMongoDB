@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retomuub.Client", "Retomuub.Client\Retomuub.Client.csproj", "{4A5FE03F-65A0-4CE6-8F44-45C22D0D4823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retomuub.Bussiness", "Retomuub.Bussiness\Retomuub.Bussiness.csproj", "{B2842726-B166-4D6C-A2FA-5BD8718C09B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retomuub.Common", "Retomuub.Common\Retomuub.Common.csproj", "{C30251D7-2BE8-4F7F-AC18-88ADEA6C764A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Retomuub.Data", "Retomuub.Data\Retomuub.Data.csproj", "{7020B5ED-045C-460E-BA6E-1ABDC96926BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A5FE03F-65A0-4CE6-8F44-45C22D0D4823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A5FE03F-65A0-4CE6-8F44-45C22D0D4823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A5FE03F-65A0-4CE6-8F44-45C22D0D4823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A5FE03F-65A0-4CE6-8F44-45C22D0D4823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2842726-B166-4D6C-A2FA-5BD8718C09B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2842726-B166-4D6C-A2FA-5BD8718C09B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2842726-B166-4D6C-A2FA-5BD8718C09B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2842726-B166-4D6C-A2FA-5BD8718C09B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C30251D7-2BE8-4F7F-AC18-88ADEA6C764A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C30251D7-2BE8-4F7F-AC18-88ADEA6C764A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C30251D7-2BE8-4F7F-AC18-88ADEA6C764A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C30251D7-2BE8-4F7F-AC18-88ADEA6C764A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7020B5ED-045C-460E-BA6E-1ABDC96926BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7020B5ED-045C-460E-BA6E-1ABDC96926BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7020B5ED-045C-460E-BA6E-1ABDC96926BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7020B5ED-045C-460E-BA6E-1ABDC96926BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
