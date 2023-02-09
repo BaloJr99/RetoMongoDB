@@ -10,46 +10,43 @@ using MongoDB.Bson;
 
 namespace Retomuub.Bussiness.Services
 {
-    public class IngredientService : IIngredientCollection
+    public class IngredientService: IIngredientCollection
     {
+        private readonly IMongoCollection<Ingredient> _ingredient;
 
-        private readonly MongoDBRepository _repo = new MongoDBRepository();
-        private IMongoCollection<Ingredient> Collection;
-
-
-        public IngredientService()
+        public IngredientService(IMongoCollection<Ingredient> ingredient)
         {
-            _repo = new MongoDBRepository();
-            Collection = _repo.db.GetCollection<Ingredient>("Ingredients");
+            _ingredient = ingredient;
         }
+
         public async Task DeleteIngredient(string id)
         {
             var filter = Builders<Ingredient>.Filter.Eq( s => s.Id, new ObjectId(id));
-            await Collection.DeleteOneAsync( filter );
+            await _ingredient.DeleteOneAsync( filter );
         }
 
         public async Task<List<Ingredient>> GetAllIngredients()
         {
-            var ingredients = await Collection.FindAsync(new BsonDocument());
+            var ingredients = await _ingredient.FindAsync(new BsonDocument());
             return ingredients.ToList();
         }
 
         public async Task<Ingredient> GetIngredientById(string id)
         {
-            var ingredient = await Collection.FindAsync(new BsonDocument{{ "_id", new ObjectId(id) }});
+            var ingredient = await _ingredient.FindAsync(new BsonDocument{{ "_id", new ObjectId(id) }});
             return ingredient.First();
         }
 
         public async Task InsertIngredient(Ingredient ingredient)
         {
-            await Collection.InsertOneAsync(ingredient);
+            await _ingredient.InsertOneAsync(ingredient);
         }
 
         public async Task UpdateIngredient(Ingredient ingredient)
         {
             var filter = Builders<Ingredient>.Filter.Eq(s => s.Id, ingredient.Id);
 
-            await Collection.ReplaceOneAsync( filter, ingredient );
+            await _ingredient.ReplaceOneAsync( filter, ingredient );
         }
     }
 }
