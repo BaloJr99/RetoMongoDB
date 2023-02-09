@@ -6,8 +6,9 @@ using Retomuub.Data.Model;
 var builder = WebApplication.CreateBuilder(args);
 
 ConfigureMongoDB();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddNewtonsoftJson();;
 builder.Services.AddScoped<IIngredientCollection, IngredientService>();
+builder.Services.AddScoped<IMealCollection, MealService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,4 +39,8 @@ void ConfigureMongoDB(){
     var ingredientCollection = db.GetCollection<Ingredient>("Ingredients");
     builder.Services.AddSingleton(ingredientCollection);
     builder.Services.AddSingleton<IngredientService>();
+
+    var mealCollection = db.GetCollection<Meal>("Meals");
+    builder.Services.AddSingleton(mealCollection);
+    builder.Services.AddSingleton<MealService>();
 }   

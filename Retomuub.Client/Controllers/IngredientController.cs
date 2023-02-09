@@ -21,7 +21,7 @@ namespace Retomuub.Client.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllIngredients()
         {
             var ingredients = await _ingredient.GetAllIngredients();
             return Ok(ingredients);
