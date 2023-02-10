@@ -9,7 +9,8 @@ namespace Retomuub.Bussiness.Interfaces
     public interface IUserCollection
     {
         Task InsertUser(UserDTO userDTO);
-        Task<bool> LoginUser(LoggedUserDTO userDTO);
+        Task<UserDTO> GetUsuario(string id);
+        Task<UserDTO> LoginUser(LoggedUserDTO userDTO);
         Task LogoutUser(UserDTO userDTO);
     }
 }

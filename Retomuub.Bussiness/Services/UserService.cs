@@ -43,17 +43,17 @@ namespace Retomuub.Bussiness.Services
             return Convert.ToHexString(hashedPassword);
         }
 
-        public async Task<bool> LoginUser(LoggedUserDTO userDTO)
+        public async Task<UserDTO> LoginUser(LoggedUserDTO userDTO)
         {
             var filter = Builders<User>.Filter.Eq( s => s.Username, userDTO.Username);
             var loginUser = (await _user.FindAsync(filter)).ToList();
             if(loginUser != null){
                 if(HashPassword($"{userDTO.Password}{loginUser.First().Salt}") == loginUser.First().Password){
                     Console.WriteLine("Logged");
-                    return true;
+                    return _mapper.Map<UserDTO>(loginUser.First());
                 }
             }
-            return false;
+            return null!;
         }
 
         public Task LogoutUser(UserDTO userDTO)
@@ -61,5 +61,12 @@ namespace Retomuub.Bussiness.Services
             throw new NotImplementedException();
         }
 
+        public async Task<UserDTO> GetUsuario(string id)
+        {
+            var filter = Builders<User>.Filter.Eq( s => s.Id, ObjectId.Parse(id));
+            var loginUser = (await _user.FindAsync(filter)).ToList();
+            var loginUserDTO = _mapper.Map<UserDTO>(loginUser.First());
+            return loginUserDTO;
+        }
     }
 }

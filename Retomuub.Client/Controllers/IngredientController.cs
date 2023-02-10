@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -10,7 +11,8 @@ using Retomuub.Bussiness.Interfaces;
 using Retomuub.Data.DTO;
 
 namespace Retomuub.Client.Controllers
-{
+{    
+    [Authorize(Roles = "Admin")]
     public class IngredientController : Controller
     {
         private IIngredientCollection _ingredient;

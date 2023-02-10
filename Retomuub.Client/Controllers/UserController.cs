@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Retomuub.Bussiness.Interfaces;
+using Retomuub.Bussiness.Jwt;
 using Retomuub.Data.DTO;
 
 namespace Retomuub.Client.Controllers
@@ -13,9 +14,11 @@ namespace Retomuub.Client.Controllers
     public class UserController : Controller
     {
         private readonly IUserCollection _user;
-        public UserController(IUserCollection user)
+        private readonly IJwtUtils _jwt;
+        public UserController(IUserCollection user, IJwtUtils jwt)
         {
             _user = user;
+            _jwt = jwt;
         }
 
         [HttpPost]
@@ -30,11 +33,19 @@ namespace Retomuub.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginUser([FromBody]LoggedUserDTO userDTO)
         {
-            var result = ModelState.IsValid;
-            if( result ){
-                result = await _user.LoginUser( userDTO );
+            if( ModelState.IsValid ){
+                var user = await _user.LoginUser( userDTO );
+                if( user != null ){
+                    var token = _jwt.GenerateToken(user);
+                    if(token != null){
+                        HttpContext.Session.SetString("Token", token);
+                        HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions(){HttpOnly = true, Expires = DateTime.Now.AddDays(7),  });
+                    }else{
+                        return Ok(new { success  = false });
+                    }
+                }
             }
-            return Ok(new { success = result });
+            return Ok(new { success = ModelState.IsValid });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
