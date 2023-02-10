@@ -14,6 +14,7 @@ namespace Retomuub.Bussiness.Automapper
         {   
             CreateMap<IngredientDTO, Ingredient>().ReverseMap();
             CreateMap<MealDTO, Meal>().ReverseMap();
+            CreateMap<UserDTO, User>().ReverseMap();
         }
     }
 }

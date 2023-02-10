@@ -17,6 +17,7 @@ builder.Services.AddSingleton(new MapperConfiguration( cfg => {
 
 builder.Services.AddScoped<IIngredientCollection, IngredientService>();
 builder.Services.AddScoped<IMealCollection, MealService>();
+builder.Services.AddScoped<IUserCollection, UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,4 +52,8 @@ void ConfigureMongoDB(){
     var mealCollection = db.GetCollection<Meal>("Meals");
     builder.Services.AddSingleton(mealCollection);
     builder.Services.AddSingleton<MealService>();
+
+    var userCollection = db.GetCollection<User>("Users");
+    builder.Services.AddSingleton(userCollection);
+    builder.Services.AddSingleton<UserService>();
 }   
