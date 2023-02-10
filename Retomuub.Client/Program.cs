@@ -1,12 +1,20 @@
+using AutoMapper;
 using MongoDB.Driver;
+using Retomuub.Bussiness.Automapper;
 using Retomuub.Bussiness.Interfaces;
 using Retomuub.Bussiness.Services;
 using Retomuub.Data.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 ConfigureMongoDB();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();;
+
+builder.Services.AddSingleton(new MapperConfiguration( cfg => {
+    cfg.AddProfile(new AutomapperProfile());
+}).CreateMapper());
+
 builder.Services.AddScoped<IIngredientCollection, IngredientService>();
 builder.Services.AddScoped<IMealCollection, MealService>();
 var app = builder.Build();

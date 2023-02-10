@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using Retomuub.Bussiness.Interfaces;
-using Retomuub.Data.Model;
+using Retomuub.Data.DTO;
 
 namespace Retomuub.Client.Controllers
 {
@@ -36,17 +36,19 @@ namespace Retomuub.Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateIngredient([FromBody]Ingredient ingredient)
+        public async Task<IActionResult> CreateIngredient([FromBody]IngredientDTO ingredient)
         {
-            await _ingredient.InsertIngredient( ingredient );
-            return Ok(new { success = true });
+            if( ModelState.IsValid ){
+                await _ingredient.InsertIngredient( ingredient );
+            }
+            return Ok(new { success = ModelState.IsValid });
         }
 
         [HttpPut]
         [Route("/Ingredient/UpdateIngredient/{id}")]
-        public async Task<IActionResult> UpdateIngredient([FromBody]Ingredient ingredient, string id)
+        public async Task<IActionResult> UpdateIngredient([FromBody]IngredientDTO ingredient, string id)
         {
-            ingredient.Id = new ObjectId(id);
+            ingredient.Id = ObjectId.Parse(id);
             await _ingredient.UpdateIngredient( ingredient );
             return Ok(new { success = true });
         }

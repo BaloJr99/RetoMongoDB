@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Retomuub.Data.Model;
+using Retomuub.Data.DTO;
 
 namespace Retomuub.Bussiness.Interfaces
 {
     public interface IIngredientCollection
     {
-        Task InsertIngredient(Ingredient ingredient);
-        Task UpdateIngredient(Ingredient ingredient);
+        Task InsertIngredient(IngredientDTO ingredient);
+        Task UpdateIngredient(IngredientDTO ingredient);
         Task DeleteIngredient(string id);
-        Task<List<Ingredient>> GetAllIngredients();
-        Task<Ingredient> GetIngredientById(string id);
+        Task<List<IngredientDTO>> GetAllIngredients();
+        Task<IngredientDTO> GetIngredientById(string id);
     }
 }

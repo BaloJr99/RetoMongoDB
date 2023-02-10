@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using Retomuub.Bussiness.Interfaces;
-using Retomuub.Data.Model;
+using Retomuub.Data.DTO;
 
 namespace Retomuub.Client.Controllers
 {
@@ -36,7 +36,7 @@ namespace Retomuub.Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMeal([FromBody]Meal meal)
+        public async Task<IActionResult> CreateMeal([FromBody]MealDTO meal)
         {
             await _meal.InsertMeal( meal );
             return Ok(new { success = true });
@@ -44,9 +44,9 @@ namespace Retomuub.Client.Controllers
 
         [HttpPut]
         [Route("/Meal/UpdateMeal/{id}")]
-        public async Task<IActionResult> UpdateMeal([FromBody]Meal meal, string id)
+        public async Task<IActionResult> UpdateMeal([FromBody]MealDTO meal, string id)
         {
-            meal.Id = new ObjectId(id);
+            meal.Id = ObjectId.Parse(id);
             await _meal.UpdateMeal( meal );
             return Ok(new { success = true });
         }
